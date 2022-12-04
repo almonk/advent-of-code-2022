@@ -1,0 +1,9 @@
+source "https://rubygems.org"
+
+group :development do
+  gem "ruby-lsp", require: false
+end
+
+gem "sorbet", :group => :development
+gem "sorbet-runtime"
+gem "tapioca", require: false, :group => :development

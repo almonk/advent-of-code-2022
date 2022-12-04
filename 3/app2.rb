@@ -1,3 +1,4 @@
+# typed: true
 require "typesafe_enum"
 
 # Model an object that is a rucksack with many compartments
@@ -14,7 +15,7 @@ class Rucksack
     @compartments.map do |compartment|
       compartment.chars.uniq
     end
-    .reduce(:&)
+      .reduce(:&)
   end
 end
 
