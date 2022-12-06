@@ -11,7 +11,7 @@ def contains?(array1, array2)
   array2.all? { |num| array1.include?(num) }
 end
 
-# Runs contains? on each pair of arrays
+# Runs `contains?` on each pair of arrays
 def either_contains?(array1, array2)
   contains?(array1, array2) || contains?(array2, array1)
 end
