@@ -26,10 +26,10 @@ def get_neighbors(x, y)
 
   # Return the values
   return [
-           split_number(left),
-           split_number(up),
-           split_number(right),
+           split_number(up).reverse,
+           split_number(left).reverse,
            split_number(down),
+           split_number(right),
          ]
 end
 
@@ -49,6 +49,29 @@ def is_visible?(value, neighbors)
   return answers.include?(true)
 end
 
+# For each neighbor of a given position, iterate through the values and count how many are lower or equal to the original value
+def count_visible(value, neighbors)
+  answers = []
+  neighbors.each do |neighbor|
+    count = 0
+
+    neighbor.each do |n|
+      count += 1
+      break if n >= value
+    end
+
+    answers << count
+  end
+
+  return answers
+end
+
+# Given the values from count_visible, return the multiplied sum of the values
+def scenic_score(values)
+  values.compact!
+  values.inject(:*)
+end
+
 @input = File.read("input.txt")
 
 # Count the number of columns before the first newline
@@ -63,6 +86,7 @@ columns = @input.index("\n")
 puts @input
 
 count = 0
+highest_scenic_score = 0
 
 # For each item in the input array, check if it is the lowest in its row and column
 @input.each_with_index do |row, y|
@@ -75,8 +99,11 @@ count = 0
       count += 1
     else
       count += 1 if is_visible?(value, neighbors)
+      puts "#{value}(x #{x}, y #{y}) #{count_visible(value, neighbors)} Scenic score: #{scenic_score(count_visible(value, neighbors))}"
+      highest_scenic_score = scenic_score(count_visible(value, neighbors)) if scenic_score(count_visible(value, neighbors)) > highest_scenic_score
     end
   end
 end
 
 puts "There are #{count} visible trees."
+puts "The highest scenic score is #{highest_scenic_score}."
