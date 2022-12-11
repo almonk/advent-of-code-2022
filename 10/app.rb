@@ -66,26 +66,8 @@ class Screen
     # Wrap the position around the screen
     # So that positions 0-39 are on the first row, 40-79 are on the second row, etc.
 
-    case position
-    when 0..39
-      row = 0
-      column = position
-    when 40..79
-      row = 1
-      column = position - 40
-    when 80..119
-      row = 2
-      column = position - 80
-    when 120..159
-      row = 3
-      column = position - 120
-    when 160..199
-      row = 4
-      column = position - 160
-    when 200..239
-      row = 5
-      column = position - 200
-    end
+    row = position / 40
+    column = position % 40
 
     # Draw the pixel
     @pixels[row][column] = 1
