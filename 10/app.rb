@@ -95,7 +95,7 @@ class Screen
     # Draw the screen
     @pixels.each do |row|
       row.each do |pixel|
-        print pixel == 1 ? "🟥" : "⬛"
+        print pixel == 1 ? "🟩" : "⬛"
       end
       puts
     end
